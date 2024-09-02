@@ -31,7 +31,7 @@ Returns a list of movie recommendations for a given movie.
 
 ### GET /
 
-Serves the index.html file from the static folder.
+Serves a welcome text
 
 ## Dataset
 
@@ -53,7 +53,7 @@ The API uses a cosine similarity algorithm to generate recommendations. The algo
 
 ## Error Handling
 
-The API handles 404 errors by serving the index.html file from the static folder.
+The API handles 404 errors by serving a 404 message
 
 ## Running the API
 

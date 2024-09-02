@@ -91,7 +91,7 @@ def similarity(name):
 
 @app.errorhandler(404)
 def not_found(e):
-    return send_from_directory(app.static_folder, 'index.html')
+    return "Sorry! Not Found. Please check your URL."
 
 if __name__ == '__main__':
     app.run(debug=True)
