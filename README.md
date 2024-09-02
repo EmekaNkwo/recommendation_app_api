@@ -1,60 +1,61 @@
-# Movie Recommender API
+# Movie Recommendation System API
 
-=======================
+=====================================
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Endpoints](#endpoints)
+3. [Usage](#usage)
+4. [Recommendation System](#recommendation-system)
 
 ## Overview
 
-This API provides a movie recommendation system based on cosine similarity. It uses a dataset of movies to generate recommendations for a given movie.
+This API provides a movie recommendation system that suggests movies based on their similarity. The system uses a TF-IDF vectorizer to calculate the similarity between movie descriptions.
 
 ## Endpoints
 
-### GET /api/movies
+### 1. Get All Movies
 
-Returns a list of all movies in the dataset.
+- **URL:** `/api/movies`
+- **Method:** `GET`
+- **Response:** A JSON object containing an array of all movie titles.
 
-- Response: `{"arr": ["Movie1", "Movie2", ...]}`
-- Example: `http://localhost:5000/api/movies`
+### 2. Get Random Movies
 
-### GET /api/random
+- **URL:** `/api/random`
+- **Method:** `GET`
+- **Response:** A JSON object containing an array of 10 random movie titles.
 
-Returns a list of 10 random movies from the dataset.
+### 3. Get Similar Movies
 
-- Response: `{"arr": ["Movie1", "Movie2", ...]}`
-- Example: `http://localhost:5000/api/random`
+- **URL:** `/api/similarity/<name>`
+- **Method:** `GET`
+- **Response:** A JSON object containing an array of movie titles similar to the input movie.
 
-### GET /api/similarity/<name>
+### 4. Serve
 
-Returns a list of movie recommendations for a given movie.
+- **URL:** `/`
+- **Method:** `GET`
+- **Response:** A welcome message.
 
-- Response: `{"movies": ["Movie1", "Movie2", ...]}`
-- Example: `http://localhost:5000/api/similarity/The%20Shawshank%20Redemption`
+## Usage
 
-### GET /
+To use the API, simply send a GET request to the desired endpoint. For example, to get all movies, send a GET request to `/api/movies`.
 
-Serves a welcome text
+## Recommendation System
 
-## Dataset
+The recommendation system uses a TF-IDF vectorizer to calculate the similarity between movie descriptions. The system is trained on a dataset of movie descriptions, and can recommend movies based on their similarity to a given input movie.
 
-The API uses a dataset of movies stored in a CSV file named `main_data.csv`. The dataset contains the following columns:
+The system consists of the following components:
 
-- `movie_title`: The title of the movie.
-- `comb`: A combination of the movie's title and other metadata.
+- **Data Loader:** Loads the movie dataset into memory.
+- **TF-IDF Vectorizer:** Calculates the TF-IDF vectors for each movie description.
+- **Similarity Calculator:** Calculates the similarity between movie descriptions using the TF-IDF vectors.
+- **Recommendation Generator:** Generates a list of recommended movies based on the similarity scores.
 
-## Recommendation Algorithm
+The system is implemented using the following algorithms:
 
-The API uses a cosine similarity algorithm to generate recommendations. The algorithm works as follows:
-
-1. Read the dataset into a pandas dataframe.
-2. Create a count matrix of the movie titles using a CountVectorizer.
-3. Calculate the cosine similarity between the count matrix and itself.
-4. For a given movie, find the index of the movie in the dataframe.
-5. Get the similarity scores for the given movie and sort them in descending order.
-6. Return the top 20 movies with the highest similarity scores.
-
-## Error Handling
-
-The API handles 404 errors by serving a 404 message
-
-## Running the API
-
-To run the API, save this code in a file named `app.py` and run it using `python app.py`. The API will be available at `http://localhost:5000`.
+- **TF-IDF Vectorizer:** Uses the scikit-learn library to calculate the TF-IDF vectors.
+- **Similarity Calculator:** Uses the cosine similarity metric to calculate the similarity between movie descriptions.
+- **Recommendation Generator:** Uses a simple ranking algorithm to generate the list of recommended movies.
